@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Cms from "../views/Cms.vue";
 import Store from "../views/Store.vue";
+import Uploads from "../views/Uploads.vue";
 
 Vue.use(VueRouter);
 
@@ -30,6 +31,11 @@ const routes = [
     path: "/store",
     name: "store",
     component: Store
+  },
+  {
+    path: "/uploads",
+    name: "uploads",
+    component: Uploads
   }
 ];
 

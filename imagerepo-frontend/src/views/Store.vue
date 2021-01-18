@@ -11,47 +11,54 @@
         </b-col>
       </b-row>
       <hr class="my-4" />
-      <b-row cols="2" class="mt-2 align-self-md-stretch">
-        <!-- <b-col lg="10" class="pb-2"> -->
-        <div v-for="(image, index) in imageData" :key="index">
-          <!-- <img :src="imageBlobs[index]" alt="portrait" /> -->
-          <b-card
-            :title="image.name"
-            :img-src="imageBlobs[index]"
-            img-alt="Image"
-            img-top
-            tag="article"
-            style="max-width: 20rem;"
-            class="mb-5 h-100"
-          >
-            <b-card-text>
-              <p>Price: {{ image.price }}</p>
-              <p>Portrait number {{ index }}</p>
-            </b-card-text>
+      <b-col class="mt-5">
+        <b-row class="mb-5">
+          <b-form-input
+            v-model="searchQuery"
+            placeholder="Search for a portrait"
+          ></b-form-input>
+        </b-row>
+        <b-row cols="3" class="align-self-md-stretch">
+          <div v-for="image in resultQuery" :key="image.index">
+            <!-- <img :src="imageBlobs[index]" alt="portrait" /> -->
+            <b-card
+              :title="image.name"
+              :img-src="imageBlobs[image.index]"
+              img-alt="Image"
+              img-top
+              tag="article"
+              img-height="50%"
+              img-width="40%"
+              class="h-100"
+            >
+              <b-card-text>
+                <p>Price: {{ image.price }}</p>
+                <!-- <p>Portrait number {{ image.index }}</p> -->
+              </b-card-text>
 
-            <b-button href="#" variant="primary">Purchase</b-button>
-          </b-card>
-        </div>
-      </b-row>
-
+              <b-button href="#" variant="primary">Purchase</b-button>
+            </b-card>
+          </div>
+        </b-row>
+      </b-col>
+      
       <b-modal hide-footer ref="my-modal" title="Image upload">
         <p class="my-4">Error</p>
       </b-modal>
-
-      <!-- {{imageData}} -->
     </b-container>
   </div>
 </template>
 
 <script>
-// import axios from "axios";
 import { mapState, mapActions } from "vuex";
 
 export default {
   name: "Cms",
   components: {},
   data() {
-    return {};
+    return {
+      searchQuery: ""
+    };
   },
   async created() {
     await this.getImageData();
@@ -63,7 +70,19 @@ export default {
   computed: {
     ...mapState({
       imageData: state => state.imagerepo.imageData,
-      imageBlobs: state => state.imagerepo.imageBlobs
+      imageBlobs: state => state.imagerepo.imageBlobs,
+      resultQuery() {
+        if (this.searchQuery !== "") {
+          return this.imageData.filter(item => {
+            return this.searchQuery
+              .toLowerCase()
+              .split(" ")
+              .every(v => item.name.toLowerCase().includes(v));
+          });
+        } else {
+          return this.imageData;
+        }
+      }
     })
   }
 };

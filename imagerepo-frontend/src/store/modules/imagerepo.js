@@ -48,7 +48,39 @@ const actions = {
       }
     }
     commit("STORE_IMAGE_BLOBS", payload);
-  }
+    },
+  async deleteImageData({ commit }, payload) {
+      var config = {
+        method: 'delete',
+        url: 'http://localhost:3000/products/' + payload._id,
+        headers: { 
+          'Content-Type': 'application/json'
+        }
+      };
+      try {
+          await axios(config);
+          commit("UPDATE_IMAGE_DATA_BLOBS", payload);
+      } catch (err) {
+          console.log(err);
+      }
+    },
+    async editImageData({ commit }, payload) {
+      const data = JSON.stringify(payload.updateValues);
+      var config = {
+        method: 'patch',
+        url: 'http://localhost:3000/products/' + payload._id,
+        headers: { 
+            'Content-Type': 'application/json',
+          },
+        data: data
+      };
+      try {
+         await axios(config);
+          commit("UPDATE_IMAGE_DATA", payload);
+      } catch (err) {
+          console.log(err);
+      }
+  },
 };
 
 const mutations = {
@@ -58,7 +90,28 @@ const mutations = {
 
   STORE_IMAGE_BLOBS: (state, payload) => {
     state.imageBlobs = payload;
-    console.log("payload is ", state.imageBlobs);
+    // console.log("payload is ", state.imageBlobs);
+  },
+  UPDATE_IMAGE_DATA_BLOBS: (state, payload) => {
+      state.imageData = state.imageData.filter(el => el._id != payload._id);
+      state.imageBlobs = state.imageBlobs.filter(el => el.index != payload.index);
+  },
+    UPDATE_IMAGE_DATA: (state, payload) => {
+        if (payload.updateValues.length > 0) {
+            for (const el of payload.updateValues) {
+                if (el.propName === "price") {
+                    state.imageData[payload.index].price = el.value;
+                } else {
+                    state.imageData[payload.index].name = el.value;
+                }
+            }
+        }
+        else if (payload.updateValues[0].propName === "price") {
+            state.imageData[payload.index].price = payload.updateValues[0].value;
+        }
+        else {
+             state.imageData[payload.index].name = payload.updateValues[0].value;
+        }
   }
 };
 

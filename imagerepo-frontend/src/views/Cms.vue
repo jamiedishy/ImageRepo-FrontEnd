@@ -4,7 +4,15 @@
       <b-row>
         <b-col cols="6" class="mt-5">
           <h1>CMS Tool</h1>
-          <h2 class="mt-3">Upload Images of Biscuit!</h2>
+          <h2 class="my-3">Upload Images of Biscuit!</h2>
+          <b-button
+            to="/uploads"
+            class="mb-3"
+            pill
+            variant="outline-primary"
+            size="md"
+            >View uploaded images</b-button
+          >
         </b-col>
         <b-col cols="4">
           <b-img class="image mr-5" alt="Home image" src="cms2.png" />
@@ -19,7 +27,7 @@
             ref="file-input"
             class="mb-2"
           ></b-form-file>
-          <b-button @click="file = null">Clear selection</b-button>
+          <b-button @click="initializeVariables()">Clear selection</b-button>
         </b-col>
       </b-row>
       <b-row v-if="file != null" align-h="center">
@@ -44,6 +52,11 @@
                 v-model="price"
                 placeholder="Enter image price"
               ></b-form-input>
+              <b-form-tags
+                class="mt-3"
+                input-id="tags-basic"
+                v-model="tagValue"
+              ></b-form-tags>
             </b-card-text>
           </b-card>
           <b-button
@@ -83,14 +96,11 @@ export default {
       name: "",
       price: "",
       error: false,
-      selectedFile: ""
+      selectedFile: "",
+      tagValue: []
     };
   },
   methods: {
-    clearFiles() {
-      console.log(this.file);
-      console.log(this.imageData);
-    },
     previewImage(event) {
       this.selectedFile = event.target.files[0];
       let input = event.target;
@@ -103,6 +113,7 @@ export default {
       }
     },
     async uploadImage() {
+      this.error = false;
       const formData = new FormData();
       formData.append(
         "productImage",
@@ -127,7 +138,8 @@ export default {
       this.selectedFile = "";
       this.name = "";
       this.price = "";
-      this.error = false;
+      // this.error = false;
+      this.tagValue = [];
     }
   }
 };

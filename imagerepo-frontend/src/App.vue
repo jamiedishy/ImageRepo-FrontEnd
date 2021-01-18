@@ -13,8 +13,10 @@
 </template>
 
 <style>
+@import url("https://fonts.googleapis.com/css?family=Montserrat|Prata");
+@import url("https://fonts.googleapis.com/css?family=Cormorant+Garamond|Raleway&display=swap");
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Prata, Helvetica, Arial, sans-serif;
   /* -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; */
   /* text-align: center; */
