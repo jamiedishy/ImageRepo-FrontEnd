@@ -1,18 +1,27 @@
 <template>
   <div class="home">
     <b-container class="mt-5">
-    <b-row>
-      <b-col>
-        <b-img center fluid class="image" alt="Home image" src="home2.png" />
-      </b-col>
-    </b-row>
-    <b-row class="mt-2" align-h="center">
-      <b-col lg="4" class="pb-2">
-        <b-button to="Cms" class="ml-5 mr-5 mb-3" pill variant="primary" size="lg">CMS</b-button>
-        <b-button class="mb-3" pill variant="primary" size="lg">Store</b-button>
-      </b-col>
-    </b-row>
-</b-container>
+      <b-row>
+        <b-col>
+          <b-img center fluid class="image" alt="Home image" src="home2.png" />
+        </b-col>
+      </b-row>
+      <b-row class="mt-2" align-h="center">
+        <b-col lg="4" class="pb-2">
+          <b-button
+            to="cms"
+            class="ml-5 mr-5 mb-3"
+            pill
+            variant="primary"
+            size="lg"
+            >CMS</b-button
+          >
+          <b-button to="store" class="mb-3" pill variant="primary" size="lg"
+            >Store</b-button
+          >
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
@@ -22,7 +31,7 @@
 
 export default {
   name: "Home",
-  components: {},
+  components: {}
 };
 </script>
 

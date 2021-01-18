@@ -1,6 +1,14 @@
 <template>
-  <div class="my-5" id="app">
-    <router-view />
+  <div id="app" class="ml-4">
+    <b-navbar class="mt-4" variant="faded" type="light">
+      <b-navbar-brand to="/">
+        <img src="logo.png" class="d-inline-block align-top" alt="Dog" />
+        Biscuit's Gallery
+      </b-navbar-brand>
+    </b-navbar>
+    <div class="my-5">
+      <router-view />
+    </div>
   </div>
 </template>
 

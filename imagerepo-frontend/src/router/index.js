@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Cms from "../views/Cms.vue";
+import Store from "../views/Store.vue";
 
 Vue.use(VueRouter);
 
@@ -22,8 +23,13 @@ const routes = [
   },
   {
     path: "/cms",
-    name: "Cms",
+    name: "cms",
     component: Cms
+  },
+  {
+    path: "/store",
+    name: "store",
+    component: Store
   }
 ];
 
