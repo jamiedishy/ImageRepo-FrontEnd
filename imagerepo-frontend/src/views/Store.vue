@@ -21,17 +21,14 @@
         <b-row cols="3" class="align-self-md-stretch">
           <div v-for="image in resultQuery" :key="image.index">
             <!-- <img :src="imageBlobs[index]" alt="portrait" /> -->
-            <b-card
-              :title="image.name"
-              :img-src="imageBlobs[image.index]"
-              img-alt="Image"
-              img-top
-              tag="article"
-              img-height="50%"
-              img-width="40%"
-              class="h-100"
-            >
-              <b-card-text>
+            <b-card :title="image.name" tag="article" class="h-100">
+              <b-card-img-lazy
+                style="max-height: 60%;"
+                :src="imageBlobs[image.index]"
+                alt="image"
+                top
+              ></b-card-img-lazy>
+              <b-card-text class="mt-3">
                 <p>Price: {{ image.price }}</p>
                 <!-- <p>Portrait number {{ image.index }}</p> -->
               </b-card-text>
@@ -41,7 +38,6 @@
           </div>
         </b-row>
       </b-col>
-      
       <b-modal hide-footer ref="my-modal" title="Image upload">
         <p class="my-4">Error</p>
       </b-modal>

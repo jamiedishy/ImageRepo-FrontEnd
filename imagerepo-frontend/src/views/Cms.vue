@@ -16,6 +16,7 @@
         </b-col>
         <b-col cols="4">
           <b-img class="image mr-5" alt="Home image" src="cms2.png" />
+          <!-- cms2.png -->
         </b-col>
       </b-row>
       <hr class="my-4" />

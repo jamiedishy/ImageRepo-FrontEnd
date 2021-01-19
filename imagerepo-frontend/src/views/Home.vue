@@ -9,8 +9,9 @@
             fluid
             class="image my-5"
             alt="Home image"
-            src="home2-1.png"
+            src="cms2.png"
           />
+          <!-- src="home2-1.png" -->
         </b-col>
       </b-row>
       <b-row class="mt-2" align-h="center">
